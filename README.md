@@ -1,52 +1,59 @@
+![Illustrated game world branching into experience, mechanic, and theme cards](assets/readme/tableforge-thumbnail.png)
+
 # TCG TableForge
 
-![Illustrated World, Experience, and Mechanic cards on a tabletop workbench](assets/readme/tableforge-thumbnail.png)
+**Turn a game world into playable ideas.**
 
-**Turn a game world into playable ideas.** TCG TableForge is a local-first design canvas for tabletop and trading card game concepts. Start with a world or a gameplay hook, capture ideas as cards, and connect them as the design takes shape.
+TCG TableForge is a visual design canvas for tabletop and trading card games. Bring a setting, a gameplay hook, or a question you want to explore. Shape those ideas into cards, connect the pieces, and see how a game concept is coming together.
 
-## What you can do
+## From a spark to a system
 
-- Create projects with a **World-first** or **Mechanics-first** starting point.
-- Capture ideas as **World**, **Experience**, **Theme**, **Mechanic**, or **Question** cards.
-- Connect cards with relationships such as *Supports*, *Expresses*, *Creates Tension With*, and *Depends On*.
-- Search, filter, and sort your cards, then switch between Board and List views.
-- Import and export projects as JSON, or export a readable Markdown outline.
-- Use the app offline after its first successful load. The service worker caches the app shell and offers an update flow.
-- See connection and save state in the workspace footer. Project data is stored in this browser and is not synchronized.
-- Explore the sample project or use the illustrated How To guide to learn the workflow.
+Start where your idea is strongest. Build **world-first** from a place, people, or conflict, or go **mechanics-first** from an action or rule. Then connect the design dots:
 
-## Run locally
+1. Capture a **World**, **Experience**, **Theme**, **Mechanic**, or **Question** as a card.
+2. Add notes about what the idea means and what it could do.
+3. Link cards with relationships such as *Supports*, *Expresses*, *Creates Tension With*, and *Depends On*.
+4. Browse the project as a visual board or a focused list. Search, filter, and sort as the design grows.
 
-The app is a static web app with no package installation or build step. Serve the project directory over localhost so the browser can use the service worker:
+The connections help you follow an idea from the world you imagine to the choices players make and the mechanics that bring those choices to life.
+
+## A flexible workspace for game design
+
+- **Begin with either half of the puzzle.** Start from a world or from a mechanic, then let the rest of the concept emerge.
+- **Keep different kinds of thinking visible.** Separate setting details, intended player feelings, recurring themes, possible rules, and open questions.
+- **Make the relationships legible.** Connect ideas directly and inspect how a card fits into the wider project.
+- **Keep the work portable.** Export a project as JSON for backup and later import, or export a readable Markdown outline for sharing and notes.
+- **Stay in control of your work.** Projects are saved in this browser on this device; they are not uploaded or synchronized.
+
+## Get started
+
+TableForge is a static web app. There is no package installation or build step required to run it locally.
 
 ```sh
 python3 -m http.server 8000
 ```
 
-Then open [http://localhost:8000](http://localhost:8000). Data is saved in that browser's local storage. Use **Files → Export JSON** to create a backup before clearing browser data or moving to another device.
+Open [http://localhost:8000](http://localhost:8000) in your browser. Explore the sample project and the illustrated How To guide, or start a project of your own. Changes save to this browser's local storage. Export a JSON backup before clearing browser data or moving your work to another device.
 
-## Data and privacy
+After the app has loaded once from localhost or HTTPS, its service worker caches the app shell for offline use. Projects remain on the device where they were created.
 
-Projects stay in the current browser on the current device. There is no account, cloud sync, or server-side project storage. JSON import is validated before a project is added; exports are manual, so keep a backup somewhere safe if the work matters.
+## Your projects, on your device
 
-Clearing this browser's site data may delete local projects. The in-app **Clear all data** action also removes every project stored by TableForge in this browser after a confirmation step.
+TableForge has no account, cloud sync, or server-side project storage. Project data stays in the current browser on the current device. Clearing the browser's site data may delete it, so keep JSON backups of work you want to preserve. The app's **Clear all data** action removes every TableForge project in this browser after a confirmation step.
 
-## GitHub Pages
+## Hosting and project status
 
-TableForge is made from static files and can be hosted with GitHub Pages. The repository still needs a Pages Actions workflow and repository Pages settings before it can be deployed. The [release checklist](RELEASE_CHECKLIST.md) covers the recommended build/deploy workflow, project-site path checks, offline/update checks, accessibility, and release verification.
+The app is built from static files and can be hosted with GitHub Pages. GitHub Pages deployment is not configured in this repository yet; the [release checklist](RELEASE_CHECKLIST.md) tracks the workflow, deployment settings, and remaining verification before a release.
 
-## Release readiness
-
-The interface and core flows are prototyped. Automated tests, cross-browser acceptance checks, the Pages workflow, and the remaining release gates are tracked in [RELEASE_CHECKLIST.md](RELEASE_CHECKLIST.md). The checklist should be completed before describing the app as release-ready.
+The interface and core flows are prototyped. Automated tests, cross-browser acceptance checks, accessibility and offline verification, and other release gates remain on the checklist. Use the checklist as the current guide to release readiness.
 
 ## Project files
 
-- `index.html` — application UI, styling, and client-side behavior.
+- `index.html` — application interface, styling, and client-side behavior.
 - `manifest.webmanifest` — install metadata.
-- `sw.js` — versioned offline app-shell cache and update handling. Increment `CACHE_VERSION` for each release.
-- `icon.svg` — TableForge app icon.
-- `icon-tabletop-anvil.svg` — alternate icon concept.
-- `assets/readme/tableforge-thumbnail.png` — generated README thumbnail.
+- `sw.js` — offline app-shell cache and update handling.
+- `icon.svg` and `icon-tabletop-anvil.svg` — app icon concepts.
+- `assets/readme/tableforge-thumbnail.png` — README artwork.
 
 ## License
 
