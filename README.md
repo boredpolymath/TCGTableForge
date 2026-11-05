@@ -1,6 +1,6 @@
 # TCG TableForge
 
-![Connected World, Experience, and Mechanic idea cards](assets/readme/tableforge-thumbnail.png)
+![Illustrated World, Experience, and Mechanic cards on a tabletop workbench](assets/readme/tableforge-thumbnail.png)
 
 **Turn a game world into playable ideas.** TCG TableForge is a local-first design canvas for tabletop and trading card game concepts. Start with a world or a gameplay hook, capture ideas as cards, and connect them as the design takes shape.
 
