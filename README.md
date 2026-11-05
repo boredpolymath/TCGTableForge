@@ -1,12 +1,8 @@
 # TCG TableForge
 
-![Illustrated tabletop workbench with connected design cards](assets/readme/tableforge-workbench.jpg)
+![Connected World, Experience, and Mechanic idea cards](assets/readme/tableforge-thumbnail.png)
 
 **Turn a game world into playable ideas.** TCG TableForge is a local-first design canvas for tabletop and trading card game concepts. Start with a world or a gameplay hook, capture ideas as cards, and connect them as the design takes shape.
-
-| Build the idea map | Keep your work on your device |
-| --- | --- |
-| ![Illustrated World, Experience, and Mechanic cards connected by a line](assets/readme/idea-connections.jpg) | ![Illustrated design notebook and card stack beside an offline symbol](assets/readme/local-first.jpg) |
 
 ## What you can do
 
@@ -50,7 +46,7 @@ The interface and core flows are prototyped. Automated tests, cross-browser acce
 - `sw.js` — versioned offline app-shell cache and update handling. Increment `CACHE_VERSION` for each release.
 - `icon.svg` — TableForge app icon.
 - `icon-tabletop-anvil.svg` — alternate icon concept.
-- `assets/readme/` — generated README illustrations.
+- `assets/readme/tableforge-thumbnail.png` — generated README thumbnail.
 
 ## License
 

@@ -70,7 +70,7 @@ This checklist turns the current UI prototype into a release-ready, local-first 
 - [ ] Add automated tests for import validation/migration, local persistence, project/card/relationship operations, search/filter/sort, exports, and deletion scope.
 - [ ] Add browser end-to-end tests for first run, project creation, editing, reload persistence, import/export, modal behavior, offline behavior, update behavior, and mobile layout.
 - [ ] Add automated accessibility checks, then keep manual screen-reader and keyboard checks in the release process.
-- [ ] Add `README.md` with prerequisites, local development, script usage, test instructions, deployment setup, data-storage/privacy behavior, and release steps.
+- [ ] Keep `README.md` current with local development, data-storage/privacy behavior, deployment status, and release guidance as those workflows are implemented.
 - [ ] Add a `.gitignore` for generated output, local browser/test artifacts, and dependencies.
 - [ ] Create/confirm the GitHub repository, default branch, license decision, and repository remote; commit the actual source files before setting up deployment.
 
