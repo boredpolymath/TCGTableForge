@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">TCG TableForge — Tabletop Anvil icon</title>
+  <desc id="desc">A bright anvil and spark above a green tabletop on a charcoal background.</desc>
+  <rect width="512" height="512" rx="92" fill="#262626"/>
+  <rect x="93" y="359" width="326" height="27" rx="8" fill="#80ab00"/>
+  <path d="M111 216h100l29-31h128v44h-70l-29 79h-45l-25-62h-61z" fill="#f3f3f1"/>
+  <path d="M225 308h72l21 37H204z" fill="#d8d9d2"/>
+  <path d="M188 345h147l20 24H168z" fill="#f3f3f1"/>
+  <path d="M259 104l14 29 29 14-29 14-14 29-14-29-29-14 29-14z" fill="#80ab00"/>
+  <circle cx="259" cy="147" r="7" fill="#f3f3f1"/>
+  <path d="M377 150l8 16 16 8-16 8-8 16-8-16-16-8 16-8z" fill="#b5cb79"/>
+</svg>

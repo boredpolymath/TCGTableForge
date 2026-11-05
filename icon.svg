@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">TCG TableForge — Forged Cards icon</title>
+  <desc id="desc">Two overlapping trading cards with a bright spark between them on a charcoal background.</desc>
+  <rect width="512" height="512" rx="92" fill="#262626"/>
+  <g transform="rotate(-13 208 274)">
+    <rect x="98" y="128" width="220" height="292" rx="24" fill="#80ab00" stroke="#262626" stroke-width="12"/>
+    <rect x="124" y="158" width="168" height="13" rx="6.5" fill="#dce9b7" opacity=".9"/>
+    <circle cx="208" cy="278" r="47" fill="#638600"/>
+    <path d="M208 244v68m-34-34h68" stroke="#edf4d7" stroke-width="12" stroke-linecap="round"/>
+  </g>
+  <g transform="rotate(12 320 254)">
+    <rect x="194" y="105" width="220" height="292" rx="24" fill="#f3f3f1" stroke="#262626" stroke-width="12"/>
+    <rect x="220" y="135" width="168" height="13" rx="6.5" fill="#cfd0ca"/>
+    <rect x="220" y="350" width="84" height="10" rx="5" fill="#cfd0ca"/>
+  </g>
+  <path d="M304 206l17 36 36 17-36 17-17 36-17-36-36-17 36-17z" fill="#80ab00" stroke="#262626" stroke-width="10" stroke-linejoin="round"/>
+  <circle cx="304" cy="259" r="9" fill="#f3f3f1"/>
+</svg>

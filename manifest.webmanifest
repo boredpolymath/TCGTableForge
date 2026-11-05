@@ -1,0 +1,17 @@
+{
+  "name": "TCG TableForge",
+  "short_name": "TableForge",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f3f3f1",
+  "theme_color": "#262626",
+  "description": "Map the path from a trading card game world to the mechanics that bring it to life.",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
