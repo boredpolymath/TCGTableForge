@@ -28,7 +28,7 @@ This checklist tracks release readiness for TCG TableForge, a local-first Progre
 ## 3. PWA and offline readiness
 
 - [x] Add install-ready raster icons at the sizes required by supported browsers (at least 192×192 and 512×512), plus an Apple touch icon if iOS installation is supported. Verify artwork, transparency, and maskable safe zones. Raster sizes and artwork were checked; visual artwork was inspected.
-- [x] Update `manifest.webmanifest` to reference the final icons and confirm name, short name, start URL, scope, standalone display, theme color, and background color on the deployed project-site path. Manifest fields and assets pass release checks; Chrome verifies the `/TCGTableForge/` project-site path locally.
+- [x] Update `manifest.webmanifest` to reference the final icons and confirm name, short name, start URL, scope, standalone display, theme color, and background color on the deployed project-site path. Production smoke check confirmed the manifest loads and its relative start URL and scope resolve to `https://boredpolymath.github.io/TCGTableForge/`.
 - [x] Make the service worker cache name/version change on every release so the updated shell is installed reliably. The build stamps package version and source revision; Chrome acceptance verifies an update.
 - [x] Limit service-worker cache cleanup to cache names owned by this app; do not delete unrelated CacheStorage entries on the same origin. Chrome acceptance confirms an unrelated cache remains after activation.
 - [x] Restrict the offline HTML fallback to navigation requests. A missing script, icon, or other asset should not receive `index.html` as its response. Release checks verify the navigation-only fallback and the service worker returns an error for missing assets.
@@ -37,7 +37,7 @@ This checklist tracks release readiness for TCG TableForge, a local-first Progre
 - [x] Confirm install prompts/instructions are accurate where supported and fall back cleanly where installation is unavailable. The guide gives browser-based install/Add to Home Screen directions and states the app remains usable without installation.
 - [x] Confirm the app explains that projects are stored only on the current device and are not synchronized. The README and guide say so.
 - [x] Confirm users can clear app data from Settings and are told that clearing browser site data may also remove it. Settings and the guide state the scope and risk; Chrome acceptance checks clear-all behavior.
-- [ ] Verify production is served over HTTPS and the service worker registers from the final GitHub Pages URL.
+- [x] Verify production is served over HTTPS and the service worker registers from the final GitHub Pages URL. Production returned HTTPS 200; the active worker and controller use `https://boredpolymath.github.io/TCGTableForge/sw.js` and control the expected project-site scope.
 
 ## 4. Accessibility, responsive layout, and content
 
@@ -83,21 +83,21 @@ This checklist tracks release readiness for TCG TableForge, a local-first Progre
 - [x] Workflow deploy job: depend on a successful build, grant only the required `pages: write` and `id-token: write` permissions (plus `contents: read` for checkout), use the `github-pages` environment, and deploy the uploaded artifact.
 - [x] Set concurrency so two production deployments do not race, and retain the deployment URL as the environment URL.
 - [x] Pin GitHub Actions to reviewed stable versions. Confirm action versions and workflow syntax against the current [GitHub Pages custom workflow documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages) and the [official Pages starter workflow](https://github.com/actions/starter-workflows/blob/main/pages/static.yml) when implementing; GitHub’s examples can use different action versions as they evolve.
-- [ ] In repository Settings → Pages, select **GitHub Actions** as the build and deployment source. The first deploy attempt returned 404 because Pages is not enabled for this repository.
-- [x] Verify whether the app uses a repository subpath such as `https://<owner>.github.io/<repository>/`; keep all manifest, icon, CSS, script, and service-worker URLs relative or scope-aware so they work there. Local built-artifact testing at `/TCGTableForge/` passes; the production URL still needs its post-deploy check.
+- [x] In repository Settings → Pages, select **GitHub Actions** as the build and deployment source. The Pages deployment workflow completed successfully on commit `08ab2b0`.
+- [x] Verify whether the app uses a repository subpath such as `https://<owner>.github.io/<repository>/`; keep all manifest, icon, CSS, script, and service-worker URLs relative or scope-aware so they work there. Production is served at `https://boredpolymath.github.io/TCGTableForge/`; the manifest and service worker resolve correctly under that path.
 - [x] Do not add deployment secrets unless the chosen hosting setup actually requires them; standard GitHub Pages Actions deployment uses repository permissions and an environment. No deployment secrets were added.
-- [ ] Confirm the first deploy is HTTPS, the manifest loads, the service worker controls the expected path, and deep navigation/reload behavior works. Pending Pages configuration; no production URL is available yet.
+- [x] Confirm the first deploy is HTTPS, the manifest loads, the service worker controls the expected path, and deep navigation/reload behavior works. Production smoke check confirmed HTTPS, manifest, service-worker scope and control, and reload behavior at `https://boredpolymath.github.io/TCGTableForge/`.
 
 ## 8. Release verification and operations
 
-- [x] Run the full automated suite and record results for the release candidate. On commit `30740ef`, `npm ci`, release checks, all six data tests, the Chrome acceptance suite, build, and the 500-card performance run passed in GitHub Actions. The separate Pages deploy job failed because Pages is not enabled; deployment verification remains open below.
+- [x] Run the full automated suite and record results for the release candidate. On commit `08ab2b0`, `npm ci`, release checks, all six data tests, the Chrome acceptance suite, build, the 500-card performance run, and Pages deployment passed in GitHub Actions.
 - [ ] Complete the manual acceptance walkthrough on a clean browser profile and with an existing project, online and offline.
-- [ ] Check the deployed app at its final URL on desktop and mobile; install it where supported and test a cold launch.
+- [ ] Check the deployed app at its final URL on desktop and mobile; install it where supported and test a cold launch. Desktop production smoke check, JSON backup export, and offline reload passed; mobile and installed cold-launch checks remain.
 - [x] Verify import/export backup instructions and test restoring a backup into a fresh browser profile. Chrome imports the exported JSON in a separate, empty browser context and checks all five cards.
 - [x] Review the production bundle for accidental test data, secrets, debug output, and unintended external requests. The built artifact contains only runtime files and `.nojekyll`; fixture/debug/credential scans found none, and Chrome observed only same-origin app requests.
 - [ ] Tag the release and publish concise release notes with supported browsers, known limitations, and backup guidance.
 - [x] Keep a rollback path: retain the last known-good artifact or commit and document how to redeploy it through Actions. The procedure is in `RELEASE_OPERATIONS.md`; record the first known-good commit after the initial deployment.
-- [ ] After deployment, monitor the Actions run, browser console, service-worker registration, install behavior, and reported data-loss or import/export issues. The latest run's build job passed, but deployment returned 404 because Pages is not enabled.
+- [ ] After deployment, monitor the Actions run, browser console, service-worker registration, install behavior, and reported data-loss or import/export issues. The successful run and desktop browser console/service-worker smoke checks passed; ongoing issue monitoring and installed-app behavior remain.
 
 ## Release gate
 
