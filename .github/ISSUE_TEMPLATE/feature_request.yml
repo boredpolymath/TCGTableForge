@@ -1,0 +1,28 @@
+name: Feature request
+description: Suggest an improvement to TCG TableForge.
+title: "[Feature]: "
+body:
+  - type: markdown
+    attributes:
+      value: "Please search existing issues first. Do not include private project data."
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem would this solve?
+      description: Describe the design task or user need behind the request.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What would you like to happen?
+      description: Describe the behavior or workflow you have in mind.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Mention any existing workflow or alternative you have tried.
+    validations:
+      required: false

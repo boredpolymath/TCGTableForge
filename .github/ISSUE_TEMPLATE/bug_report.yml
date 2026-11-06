@@ -1,0 +1,29 @@
+name: Bug report
+description: Report a reproducible problem in TCG TableForge.
+title: "[Bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: "Please search existing issues first. Do not include private project data or security vulnerabilities in a public report."
+  - type: textarea
+    id: summary
+    attributes:
+      label: What happened?
+      description: Describe the problem and what you expected instead.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Include the smallest set of steps that reproduces the problem.
+      placeholder: "1. Open...\n2. Choose...\n3. See error..."
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Browser and device
+      description: Include browser version and device or operating system.
+    validations:
+      required: false
