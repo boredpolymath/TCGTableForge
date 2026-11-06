@@ -46,7 +46,7 @@ This checklist tracks release readiness for TCG TableForge, a local-first Progre
 - [ ] Check semantic landmarks, heading order, button names, input labels, list/card relationships, status announcements, and error announcements with a screen reader.
 - [x] Check color contrast against WCAG 2.2 AA, including green buttons, colored card types, disabled states, focus indicators, and muted text. Key foreground/background pairs are checked by `scripts/check_release.py`; text and focus colors were darkened where needed. Manual screen-reader checks remain separate.
 - [x] Check minimum target sizes and spacing for touch interactions. Chrome acceptance measures all visible buttons and card actions at 320px against the 24px minimum.
-- [x] Verify no horizontal overflow and usable reflow at 320px, 375px, tablet widths, and desktop widths up to 1280px; inspect both Board and List views and all modals, including the How To guide. Chrome acceptance checks both views at all four widths and checks the primary dialogs at 320px.
+- [x] Verify no horizontal overflow and usable reflow at 320px, 375px, tablet widths, and desktop widths up to 1280px; inspect both Board and List views and all modals, including the How To guide. Chrome acceptance checks both views at all four widths and checks the primary dialogs at 320px. A production mobile-emulation check also passed both views at all four widths, the 24px touch-target minimum, and guide/files/settings/project/card dialog fit at 320px.
 - [x] Proofread all first-run instructions, empty states, import/export messages, offline/update notices, and destructive-action confirmations.
 - [x] Test long titles, long notes, special characters, emoji, non-Latin text, and unusually large card counts for clipping or layout breakage. Chrome checks a 100-character multilingual title and 3,000-character note; the 500-card fixture checks large projects.
 
@@ -73,7 +73,7 @@ This checklist tracks release readiness for TCG TableForge, a local-first Progre
 - [x] Keep `README.md` current with local development, data-storage/privacy behavior, deployment status, and release guidance as those workflows are implemented.
 - [x] Add a `.gitignore` for generated output, local browser/test artifacts, and dependencies.
 - [x] Confirm the GitHub repository (`boredpolymath/TCGTableForge`), default branch (`main`), MIT license, and repository remote.
-- [x] Commit and push the actual source files to `main` before production deployment. Commit `30740ef` is on `main`; automated build checks pass. Pages configuration and deployment remain pending.
+- [x] Commit and push the actual source files to `main` before production deployment. Commit `030b342` is on `main`; automated build checks and Pages deployment pass.
 
 ## 7. GitHub Pages deployment
 
@@ -92,15 +92,15 @@ This checklist tracks release readiness for TCG TableForge, a local-first Progre
 
 - [x] Run the full automated suite and record results for the release candidate. On commit `08ab2b0`, `npm ci`, release checks, all six data tests, the Chrome acceptance suite, build, the 500-card performance run, and Pages deployment passed in GitHub Actions.
 - [ ] Complete the manual acceptance walkthrough on a clean browser profile and with an existing project, online and offline.
-- [ ] Check the deployed app at its final URL on desktop and mobile; install it where supported and test a cold launch. Desktop production smoke check, JSON backup export, and offline reload passed; mobile and installed cold-launch checks remain.
+- [ ] Check the deployed app at its final URL on desktop and mobile; install it where supported and test a cold launch. Desktop production smoke check and mobile-browser emulation passed, including Board/List widths, touch target sizes, and primary dialogs; physical mobile-browser, installed-app, and cold-launch checks remain.
 - [x] Verify import/export backup instructions and test restoring a backup into a fresh browser profile. Chrome imports the exported JSON in a separate, empty browser context and checks all five cards.
 - [x] Review the production bundle for accidental test data, secrets, debug output, and unintended external requests. The built artifact contains only runtime files and `.nojekyll`; fixture/debug/credential scans found none, and Chrome observed only same-origin app requests.
 - [ ] Tag the release and publish concise release notes with supported browsers, known limitations, and backup guidance.
 - [x] Keep a rollback path: retain the last known-good artifact or commit and document how to redeploy it through Actions. The procedure is in `RELEASE_OPERATIONS.md`; record the first known-good commit after the initial deployment.
-- [ ] After deployment, monitor the Actions run, browser console, service-worker registration, install behavior, and reported data-loss or import/export issues. The successful run and desktop browser console/service-worker smoke checks passed; ongoing issue monitoring and installed-app behavior remain.
+- [ ] After deployment, monitor the Actions run, browser console, service-worker registration, install behavior, and reported data-loss or import/export issues. The successful Actions run, desktop and mobile-emulation browser checks, and service-worker registration passed with no page errors or off-origin requests; installed-app behavior and ongoing issue monitoring remain.
 
 ## Release gate
 
 - [ ] No unresolved data-loss, import-validation, offline-update, accessibility, or deployment-path issues.
 - [ ] All required checks pass on the exact commit being released.
-- [ ] Production smoke checks pass at the GitHub Pages URL, including an offline reopen and a verified backup export.
+- [x] Production smoke checks pass at the GitHub Pages URL, including an offline reopen and a verified backup export. HTTPS, manifest, service-worker scope/control, JSON backup export, offline reload, mobile layout, modal fit, touch targets, same-origin requests, and zero browser page errors passed at `https://boredpolymath.github.io/TCGTableForge/`.
