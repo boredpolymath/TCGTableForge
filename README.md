@@ -27,13 +27,16 @@ The connections help you follow an idea from the world you imagine to the choice
 
 ## Get started
 
-TableForge is a static web app. There is no package installation or build step required to run it locally.
+TableForge is a static web app with no runtime dependencies. Node.js and Python are used for development checks and build tasks.
 
 ```sh
-python3 -m http.server 8000
+npm ci
+npm run dev
 ```
 
 Open [http://localhost:8000](http://localhost:8000) in your browser. Explore the sample project and the illustrated How To guide, or start a project of your own. Changes save to this browser's local storage. Export a JSON backup before clearing browser data or moving your work to another device.
+
+Run `npm run check` to validate the manifest, icons, local asset references, and service-worker safeguards. Run `npm test` for data validation tests. For browser acceptance tests, install the pinned test dependency with `python3 -m pip install -r requirements-test.txt`, install Chromium with `python3 -m playwright install chromium`, then run `npm run test:e2e` or `npm run test:performance`. `npm run fixture` regenerates the 500-card/1,000-relationship performance fixture; results from the Mac reference run are in [PERFORMANCE_REPORT.md](PERFORMANCE_REPORT.md). `npm run build` creates the deployable `dist/` folder; `npm run preview` serves it under `/TCGTableForge/` to check repository-site paths.
 
 After the app has loaded once from localhost or HTTPS, its service worker caches the app shell for offline use. Projects remain on the device where they were created.
 
@@ -41,20 +44,25 @@ After the app has loaded once from localhost or HTTPS, its service worker caches
 
 TableForge has no account, cloud sync, or server-side project storage. Project data stays in the current browser on the current device. Clearing the browser's site data may delete it, so keep JSON backups of work you want to preserve. The app's **Clear all data** action removes every TableForge project in this browser after a confirmation step.
 
+JSON imports are limited to 10 MB, 5,000 cards, and 10,000 relationships. Card titles can be up to 120 characters, notes up to 3,000, descriptions up to 500, and design goals up to 300. Projects can have up to 100 custom relationship labels, each up to 50 characters. Browser storage quotas vary by browser and device, so export backups regularly and before clearing site data.
+
 ## Hosting and project status
 
-The app is built from static files and can be hosted with GitHub Pages. GitHub Pages deployment is not configured in this repository yet; the [release checklist](RELEASE_CHECKLIST.md) tracks the workflow, deployment settings, and remaining verification before a release.
+The app is built from static files and can be hosted with GitHub Pages. The repository includes a Pages workflow; the repository Pages source setting, first deployment, and production verification remain release steps in the [release checklist](RELEASE_CHECKLIST.md). Deployment and rollback steps are in [RELEASE_OPERATIONS.md](RELEASE_OPERATIONS.md).
 
-The interface and core flows are prototyped. Automated tests, cross-browser acceptance checks, accessibility and offline verification, and other release gates remain on the checklist. Use the checklist as the current guide to release readiness.
+The interface and core flows are implemented. Chrome and data-validation checks are included; cross-browser and manual accessibility checks, the hosted CI run, and production verification remain on the checklist. Use it as the current guide to release readiness.
 
 ## Project files
 
-- `index.html` — application interface, styling, and client-side behavior.
+- `index.html` — application interface and styling.
+- `app.js` — client-side application behavior.
+- `data.js` — JSON validation, migration, and export helpers.
 - `manifest.webmanifest` — install metadata.
 - `sw.js` — offline app-shell cache and update handling.
-- `icon.svg` and `icon-tabletop-anvil.svg` — app icon concepts.
+- `icon.svg`, `icon-192.png`, `icon-512.png`, and `apple-touch-icon.png` — selected app artwork for browser and install surfaces.
+- `LICENSE` — MIT license.
 - `assets/readme/tableforge-thumbnail.png` — README artwork.
 
 ## License
 
-No license has been selected yet. Until one is added, normal copyright restrictions apply.
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.

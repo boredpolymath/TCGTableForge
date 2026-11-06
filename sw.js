@@ -1,9 +1,9 @@
 // Increment CACHE_VERSION for each release so a new shell is installed atomically.
 const CACHE_PREFIX = 'tcg-tableforge-shell-';
-const CACHE_VERSION = '2026.11.05.1';
+const CACHE_VERSION = '__BUILD_CACHE_VERSION__';
 const CACHE_NAME = `${CACHE_PREFIX}${CACHE_VERSION}`;
 const APP_ROOT = self.registration.scope;
-const SHELL = ['./', './index.html', './manifest.webmanifest', './icon.svg']
+const SHELL = ['./', './index.html', './app.js', './data.js', './manifest.webmanifest', './icon.svg', './icon-192.png', './icon-512.png', './apple-touch-icon.png']
   .map(path => new URL(path, APP_ROOT).href);
 
 self.addEventListener('install', event => {
@@ -26,6 +26,8 @@ self.addEventListener('fetch', event => {
 
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
+  const scopePath = new URL(APP_ROOT).pathname;
+  if (!url.pathname.startsWith(scopePath)) return;
 
   event.respondWith((async () => {
     const cache = await caches.open(CACHE_NAME);

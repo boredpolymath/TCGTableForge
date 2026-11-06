@@ -1,0 +1,16 @@
+{
+  "name": "tcg-tableforge",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "python3 -m http.server 8000",
+    "check": "python3 scripts/check_release.py",
+    "test": "node --test",
+    "test:e2e": "python3 tests/e2e_chrome.py",
+    "test:performance": "python3 tests/performance_chrome.py",
+    "fixture": "python3 scripts/create_performance_fixture.py",
+    "build": "python3 scripts/build.py",
+    "preview": "python3 scripts/preview.py"
+  }
+}
