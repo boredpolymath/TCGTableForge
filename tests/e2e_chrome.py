@@ -374,7 +374,9 @@ def run():
             keyboard_page.keyboard.press("Enter")
             keyboard_page.get_by_role("dialog").wait_for()
             tab_to(keyboard_page, "#cardType")
+            keyboard_page.keyboard.press("Home")
             keyboard_page.keyboard.press("ArrowDown")
+            keyboard_page.keyboard.press("Enter")
             tab_to(keyboard_page, "#cardTitle")
             keyboard_page.keyboard.insert_text("Keyboard card")
             tab_to(keyboard_page, "#cardNotes")
@@ -384,7 +386,7 @@ def run():
             keyboard_page.wait_for_timeout(250)
             assert keyboard_page.get_by_text("Keyboard card", exact=True).count() == 1, keyboard_page.locator("body").inner_text()
             tab_to(keyboard_page, "#filter")
-            keyboard_page.keyboard.press("ArrowDown")
+            keyboard_page.keyboard.press("Home")
             keyboard_page.keyboard.press("ArrowDown")
             keyboard_page.keyboard.press("Enter")
             assert keyboard_page.locator(".card").count() == 1
