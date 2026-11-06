@@ -375,7 +375,6 @@ def run():
             keyboard_page.get_by_role("dialog").wait_for()
             tab_to(keyboard_page, "#cardType")
             keyboard_page.keyboard.press("Home")
-            keyboard_page.keyboard.press("ArrowDown")
             keyboard_page.keyboard.press("Enter")
             tab_to(keyboard_page, "#cardTitle")
             keyboard_page.keyboard.insert_text("Keyboard card")
