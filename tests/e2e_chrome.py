@@ -399,6 +399,14 @@ def run():
             keyboard_page.get_by_role("dialog").wait_for()
             keyboard_page.keyboard.press("Escape")
             assert keyboard_page.get_by_role("dialog").count() == 0
+            tab_to(keyboard_page, "#guideBtn")
+            keyboard_page.keyboard.press("Enter")
+            keyboard_page.get_by_role("dialog").wait_for()
+            tab_to(keyboard_page, ".guide-reference summary")
+            keyboard_page.keyboard.press("Space")
+            assert keyboard_page.locator(".guide-reference[open]").count() == 1
+            keyboard_page.keyboard.press("Escape")
+            assert keyboard_page.get_by_role("dialog").count() == 0
             tab_to(keyboard_page, "#newProject")
             keyboard_page.keyboard.press("Enter")
             tab_to(keyboard_page, "#projectName")
