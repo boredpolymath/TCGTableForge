@@ -48,9 +48,9 @@ JSON imports are limited to 10 MB, 5,000 cards, and 10,000 relationships. Card t
 
 ## Hosting and project status
 
-The app is built from static files and can be hosted with GitHub Pages. The repository includes a Pages workflow; the repository Pages source setting, first deployment, and production verification remain release steps in the [release checklist](RELEASE_CHECKLIST.md). Deployment and rollback steps are in [RELEASE_OPERATIONS.md](RELEASE_OPERATIONS.md).
+The live app is hosted on [GitHub Pages](https://boredpolymath.github.io/TCGTableForge/). Pushes to `main` run the release checks and deploy the built app. The production smoke check confirmed HTTPS, the project-site manifest and service-worker scope, JSON backup export, and an offline reload. Deployment and rollback steps are in [RELEASE_OPERATIONS.md](RELEASE_OPERATIONS.md).
 
-The interface and core flows are implemented. Chrome and data-validation checks are included; cross-browser and manual accessibility checks, the hosted CI run, and production verification remain on the checklist. Use it as the current guide to release readiness.
+The automated data and Chrome browser suites pass in GitHub Actions. Manual screen-reader and full keyboard walkthroughs, checks across the other supported browsers and mobile devices, and installed-app cold-launch checks remain open in the [release checklist](RELEASE_CHECKLIST.md). Consult it for current release readiness and known verification gaps.
 
 ## Project files
 
