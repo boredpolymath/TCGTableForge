@@ -41,9 +41,9 @@ This checklist tracks release readiness for TCG TableForge, a local-first Progre
 
 ## 4. Accessibility, responsive layout, and content
 
-- [ ] Run keyboard-only walkthroughs for project selection, toolbar actions, cards, filters, every modal, confirmation dialogs, and guide panels. Chrome’s keyboard route covers project creation/switching, cards, filtering/sorting, List view, and Escape; the full manual walkthrough remains a release task.
+- [x] Run keyboard-only walkthroughs for project selection, toolbar actions, cards, filters, every modal, confirmation dialogs, and guide panels. The live production walkthrough in Google Chrome 156.0.8078.81 passed project selection, card and relationship creation, filtering/sorting, Board/List switching, card activation/deletion, project/files/settings dialogs, guide panels, JSON export, and project/clear-all confirmations. It also found and fixed guide-panel focus trapping; regression coverage is in the Chrome suite.
 - [x] Verify visible focus, logical tab order, Escape behavior, focus trapping/restoration in modals, and no keyboard traps. Chrome checks tab order, Escape, and modal focus return; focus outlines have 3px contrasting colors.
-- [ ] Check semantic landmarks, heading order, button names, input labels, list/card relationships, status announcements, and error announcements with a screen reader.
+- [ ] Check semantic landmarks, heading order, button names, input labels, list/card relationships, status announcements, and error announcements with a screen reader. Automated accessible-name/tab checks pass; card validation and error toasts now expose assertive alert roles. Actual VoiceOver spoken output still needs a manual check.
 - [x] Check color contrast against WCAG 2.2 AA, including green buttons, colored card types, disabled states, focus indicators, and muted text. Key foreground/background pairs are checked by `scripts/check_release.py`; text and focus colors were darkened where needed. Manual screen-reader checks remain separate.
 - [x] Check minimum target sizes and spacing for touch interactions. Chrome acceptance measures all visible buttons and card actions at 320px against the 24px minimum.
 - [x] Verify no horizontal overflow and usable reflow at 320px, 375px, tablet widths, and desktop widths up to 1280px; inspect both Board and List views and all modals, including the How To guide. Chrome acceptance checks both views at all four widths and checks the primary dialogs at 320px. A production mobile-emulation check also passed both views at all four widths, the 24px touch-target minimum, and guide/files/settings/project/card dialog fit at 320px.
@@ -54,8 +54,8 @@ This checklist tracks release readiness for TCG TableForge, a local-first Progre
 
 - [x] Create a repeatable fixture with 500 cards and 1,000 relationships. Measure project open, search/filter, board/list switching, and edits on a representative 4 GB device; meet the SRS target of under two seconds for the specified operations. Fixture and Mac measurements are in `PERFORMANCE_REPORT.md`; the M2 Mac has 8 GB RAM and measured operations are below two seconds.
 - [x] Check memory use and responsiveness with large notes and repeated project switching. The Mac stress run used a 3,000-character note and ten project switches; heap and timings are recorded in `PERFORMANCE_REPORT.md`.
-- [ ] Verify current supported Chrome, Edge, Firefox, and Safari on desktop, plus Safari on iOS and Chrome on Android. Record versions and known limitations.
-- [ ] Verify data persists across app updates and browser restarts on each supported browser.
+- [ ] Verify current supported Chrome, Edge, Firefox, and Safari on desktop, plus Safari on iOS and Chrome on Android. Record versions and known limitations. Installed Google Chrome 156.0.8078.81 passed production create/export/offline checks; Playwright WebKit 26.4 passed desktop core flows and an iPhone 15 Safari user-agent layout check. Native Safari automation requires enabling Remote Automation in macOS Settings; Firefox’s helper process was blocked by macOS; Edge is not installed; the iOS Simulator app is missing and the Android emulator remained offline.
+- [ ] Verify data persists across app updates and browser restarts on each supported browser. Cold browser restart persistence passed in Google Chrome 156.0.8078.81 and Playwright WebKit 26.4; Chrome also reopened offline. Other supported browsers and update persistence in each remain unverified.
 
 ## 6. Development scripts and repository setup
 
@@ -69,11 +69,11 @@ This checklist tracks release readiness for TCG TableForge, a local-first Progre
 - [x] Add a build script that copies only runtime files into `dist/`, includes `.nojekyll`, and does not publish source notes, test fixtures, or repository metadata. The built output was inspected and contains only runtime files and `.nojekyll`.
 - [x] Add automated tests for import validation/migration, local persistence, project/card/relationship operations, search/filter/sort, exports, and deletion scope. Six data tests and the full Chrome acceptance suite passed in the GitHub Actions build job on commit `30740ef`.
 - [x] Add browser end-to-end tests for first run, project creation, editing, reload persistence, import/export, modal behavior, offline behavior, update behavior, and mobile layout. Chrome acceptance script covers these flows at 320px and the project-site subpath.
-- [x] Add automated accessibility checks, then keep manual screen-reader and keyboard checks in the release process. Chrome acceptance checks accessible names, modal Escape/focus restoration, and tab behavior; manual assistive-technology checks remain required.
+- [x] Add automated accessibility checks, then keep manual screen-reader and keyboard checks in the release process. Chrome acceptance checks accessible names, alert roles for errors, modal Escape/focus restoration, guide-panel keyboard access, and tab behavior; manual assistive-technology checks remain required.
 - [x] Keep `README.md` current with local development, data-storage/privacy behavior, deployment status, and release guidance as those workflows are implemented.
 - [x] Add a `.gitignore` for generated output, local browser/test artifacts, and dependencies.
 - [x] Confirm the GitHub repository (`boredpolymath/TCGTableForge`), default branch (`main`), MIT license, and repository remote.
-- [x] Commit and push the actual source files to `main` before production deployment. Commit `030b342` is on `main`; automated build checks and Pages deployment pass.
+- [x] Commit and push the actual source files to `main` before production deployment. Commit `31b9232` is on `main`; automated build checks and Pages deployment pass.
 
 ## 7. GitHub Pages deployment
 
@@ -83,21 +83,21 @@ This checklist tracks release readiness for TCG TableForge, a local-first Progre
 - [x] Workflow deploy job: depend on a successful build, grant only the required `pages: write` and `id-token: write` permissions (plus `contents: read` for checkout), use the `github-pages` environment, and deploy the uploaded artifact.
 - [x] Set concurrency so two production deployments do not race, and retain the deployment URL as the environment URL.
 - [x] Pin GitHub Actions to reviewed stable versions. Confirm action versions and workflow syntax against the current [GitHub Pages custom workflow documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages) and the [official Pages starter workflow](https://github.com/actions/starter-workflows/blob/main/pages/static.yml) when implementing; GitHub’s examples can use different action versions as they evolve.
-- [x] In repository Settings → Pages, select **GitHub Actions** as the build and deployment source. The Pages deployment workflow completed successfully on commit `08ab2b0`.
+- [x] In repository Settings → Pages, select **GitHub Actions** as the build and deployment source. The Pages deployment workflow completed successfully on commit `31b9232`.
 - [x] Verify whether the app uses a repository subpath such as `https://<owner>.github.io/<repository>/`; keep all manifest, icon, CSS, script, and service-worker URLs relative or scope-aware so they work there. Production is served at `https://boredpolymath.github.io/TCGTableForge/`; the manifest and service worker resolve correctly under that path.
 - [x] Do not add deployment secrets unless the chosen hosting setup actually requires them; standard GitHub Pages Actions deployment uses repository permissions and an environment. No deployment secrets were added.
 - [x] Confirm the first deploy is HTTPS, the manifest loads, the service worker controls the expected path, and deep navigation/reload behavior works. Production smoke check confirmed HTTPS, manifest, service-worker scope and control, and reload behavior at `https://boredpolymath.github.io/TCGTableForge/`.
 
 ## 8. Release verification and operations
 
-- [x] Run the full automated suite and record results for the release candidate. On commit `08ab2b0`, `npm ci`, release checks, all six data tests, the Chrome acceptance suite, build, the 500-card performance run, and Pages deployment passed in GitHub Actions.
-- [ ] Complete the manual acceptance walkthrough on a clean browser profile and with an existing project, online and offline.
-- [ ] Check the deployed app at its final URL on desktop and mobile; install it where supported and test a cold launch. Desktop production smoke check and mobile-browser emulation passed, including Board/List widths, touch target sizes, and primary dialogs; physical mobile-browser, installed-app, and cold-launch checks remain.
+- [ ] Run the full automated suite and record results for the release candidate. Commit `31b9232` passed `npm ci`, release checks, all six data tests, the Chrome acceptance suite including guide keyboard regression, build, the 500-card performance run, and Pages deployment. Error-announcement regressions are being run on the current local changes and must pass on the deployed release commit before checking this item.
+- [ ] Complete the manual acceptance walkthrough on a clean browser profile and with an existing project, online and offline. Production Chrome automation covered a fresh profile, project creation/editing, JSON backup, restart persistence, and offline reopen; manual sign-off remains.
+- [ ] Check the deployed app at its final URL on desktop and mobile; install it where supported and test a cold launch. Desktop Chrome and mobile Chrome/WebKit emulation passed responsive checks; WebKit used an iPhone 15 Safari user-agent profile. Chrome’s manifest diagnostics returned no manifest errors. Physical-device install and installed-app cold-launch checks remain.
 - [x] Verify import/export backup instructions and test restoring a backup into a fresh browser profile. Chrome imports the exported JSON in a separate, empty browser context and checks all five cards.
 - [x] Review the production bundle for accidental test data, secrets, debug output, and unintended external requests. The built artifact contains only runtime files and `.nojekyll`; fixture/debug/credential scans found none, and Chrome observed only same-origin app requests.
 - [ ] Tag the release and publish concise release notes with supported browsers, known limitations, and backup guidance.
-- [x] Keep a rollback path: retain the last known-good artifact or commit and document how to redeploy it through Actions. The procedure is in `RELEASE_OPERATIONS.md`; record the first known-good commit after the initial deployment.
-- [ ] After deployment, monitor the Actions run, browser console, service-worker registration, install behavior, and reported data-loss or import/export issues. The successful Actions run, desktop and mobile-emulation browser checks, and service-worker registration passed with no page errors or off-origin requests; installed-app behavior and ongoing issue monitoring remain.
+- [x] Keep a rollback path: retain the last known-good artifact or commit and document how to redeploy it through Actions. Procedure and current known-good deployed revision are recorded in `RELEASE_OPERATIONS.md`.
+- [ ] After deployment, monitor the Actions run, browser console, service-worker registration, install behavior, and reported data-loss or import/export issues. The latest Actions run passed; Chrome and WebKit console checks had no page errors; service-worker registration and Chrome manifest diagnostics returned no errors; the repository currently has no open issues. Installed-app behavior and ongoing issue monitoring remain.
 
 ## Release gate
 

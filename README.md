@@ -50,7 +50,7 @@ JSON imports are limited to 10 MB, 5,000 cards, and 10,000 relationships. Card t
 
 The live app is hosted on [GitHub Pages](https://boredpolymath.github.io/TCGTableForge/). Pushes to `main` run the release checks and deploy the built app. The production smoke check confirmed HTTPS, the project-site manifest and service-worker scope, JSON backup export, and an offline reload. Deployment and rollback steps are in [RELEASE_OPERATIONS.md](RELEASE_OPERATIONS.md).
 
-The automated data and Chrome browser suites pass in GitHub Actions. Manual screen-reader and full keyboard walkthroughs, checks across the other supported browsers and mobile devices, and installed-app cold-launch checks remain open in the [release checklist](RELEASE_CHECKLIST.md). Consult it for current release readiness and known verification gaps.
+The automated data and Chrome browser suites pass in GitHub Actions, and a keyboard-only walkthrough passed against the live app in stable Chrome. Manual screen-reader checks, native checks across the other supported browsers and mobile devices, and installed-app cold-launch checks remain open in the [release checklist](RELEASE_CHECKLIST.md). Consult it for current release readiness and known verification gaps.
 
 ## Project files
 

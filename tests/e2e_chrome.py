@@ -347,6 +347,8 @@ def run():
             mobile.locator("#cardNotes").fill("This edit cannot be stored")
             mobile.locator("#saveCard").click()
             mobile.get_by_text("Could not save locally", exact=False).wait_for(timeout=5000)
+            assert mobile.locator("#toast").get_attribute("role") == "alert"
+            assert mobile.locator("#toast").get_attribute("aria-live") == "assertive"
             assert mobile.evaluate("JSON.parse(localStorage.getItem('world-mechanic-projects-v1'))[0].cards[0].notes") == before_failure
             mobile.reload(wait_until="networkidle")
 
@@ -373,6 +375,10 @@ def run():
             tab_to(keyboard_page, "#emptyAdd")
             keyboard_page.keyboard.press("Enter")
             keyboard_page.get_by_role("dialog").wait_for()
+            tab_to(keyboard_page, "#saveCard")
+            keyboard_page.keyboard.press("Enter")
+            assert keyboard_page.locator("#cardError").get_attribute("role") == "alert"
+            assert keyboard_page.locator("#cardError").get_attribute("aria-live") == "assertive"
             tab_to(keyboard_page, "#cardType")
             keyboard_page.keyboard.press("Home")
             keyboard_page.keyboard.press("Enter")
