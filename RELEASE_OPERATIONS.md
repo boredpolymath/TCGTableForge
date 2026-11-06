@@ -13,5 +13,5 @@ Keep the last known-good commit or release tag available until a replacement dep
 ## Known-good deployment
 
 - Production URL: `https://boredpolymath.github.io/TCGTableForge/`
-- Last verified deployed revision: `31b9232dd0c3a8a27e4c1b079ae021f1513922dc`
-- GitHub Actions run: `42170357108` (build and deployment succeeded)
+- Last verified deployed revision: `360f1738a0329371fe12085326d93e96184050a2`
+- GitHub Actions run: `42172374483` (build and deployment succeeded)
