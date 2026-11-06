@@ -59,7 +59,7 @@ This checklist tracks release readiness for TCG TableForge, a local-first Progre
 
 ## 6. Development scripts and repository setup
 
-- [x] Add `package.json` and commit a lockfile so local and CI dependency resolution is reproducible. Keep runtime dependencies minimal; the app should continue to work offline. The manifest and lockfile are committed and contain no runtime dependencies. `npm ci` still needs verification in CI because Node.js and npm are not installed on this Mac.
+- [x] Add `package.json` and commit a lockfile so local and CI dependency resolution is reproducible. Keep runtime dependencies minimal; the app should continue to work offline. The manifest and lockfile are committed and contain no runtime dependencies. `npm ci` passed in GitHub Actions on commit `30740ef`.
 - [x] Add scripts with stable, documented behavior, for example:
   - `npm run dev` — serve the app over localhost (not `file://`) for service-worker development.
   - `npm run check` — validate the manifest, required assets, references, and build inputs.
@@ -67,13 +67,13 @@ This checklist tracks release readiness for TCG TableForge, a local-first Progre
   - `npm run build` — create a clean `dist/` deploy artifact and stamp the service-worker cache version.
   - `npm run preview` — serve the built artifact locally under a project-site subpath to catch relative URL issues.
 - [x] Add a build script that copies only runtime files into `dist/`, includes `.nojekyll`, and does not publish source notes, test fixtures, or repository metadata. The built output was inspected and contains only runtime files and `.nojekyll`.
-- [x] Add automated tests for import validation/migration, local persistence, project/card/relationship operations, search/filter/sort, exports, and deletion scope. Data tests and Chrome acceptance checks cover these flows; the exact Node/npm suite still needs a CI run.
+- [x] Add automated tests for import validation/migration, local persistence, project/card/relationship operations, search/filter/sort, exports, and deletion scope. Six data tests and the full Chrome acceptance suite passed in the GitHub Actions build job on commit `30740ef`.
 - [x] Add browser end-to-end tests for first run, project creation, editing, reload persistence, import/export, modal behavior, offline behavior, update behavior, and mobile layout. Chrome acceptance script covers these flows at 320px and the project-site subpath.
 - [x] Add automated accessibility checks, then keep manual screen-reader and keyboard checks in the release process. Chrome acceptance checks accessible names, modal Escape/focus restoration, and tab behavior; manual assistive-technology checks remain required.
 - [x] Keep `README.md` current with local development, data-storage/privacy behavior, deployment status, and release guidance as those workflows are implemented.
 - [x] Add a `.gitignore` for generated output, local browser/test artifacts, and dependencies.
 - [x] Confirm the GitHub repository (`boredpolymath/TCGTableForge`), default branch (`main`), MIT license, and repository remote.
-- [x] Commit the actual source files before production deployment. The release workflow is prepared; push and Pages configuration remain pending.
+- [x] Commit and push the actual source files to `main` before production deployment. Commit `30740ef` is on `main`; automated build checks pass. Pages configuration and deployment remain pending.
 
 ## 7. GitHub Pages deployment
 
@@ -83,21 +83,21 @@ This checklist tracks release readiness for TCG TableForge, a local-first Progre
 - [x] Workflow deploy job: depend on a successful build, grant only the required `pages: write` and `id-token: write` permissions (plus `contents: read` for checkout), use the `github-pages` environment, and deploy the uploaded artifact.
 - [x] Set concurrency so two production deployments do not race, and retain the deployment URL as the environment URL.
 - [x] Pin GitHub Actions to reviewed stable versions. Confirm action versions and workflow syntax against the current [GitHub Pages custom workflow documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages) and the [official Pages starter workflow](https://github.com/actions/starter-workflows/blob/main/pages/static.yml) when implementing; GitHub’s examples can use different action versions as they evolve.
-- [ ] In repository Settings → Pages, select **GitHub Actions** as the build and deployment source.
+- [ ] In repository Settings → Pages, select **GitHub Actions** as the build and deployment source. The first deploy attempt returned 404 because Pages is not enabled for this repository.
 - [x] Verify whether the app uses a repository subpath such as `https://<owner>.github.io/<repository>/`; keep all manifest, icon, CSS, script, and service-worker URLs relative or scope-aware so they work there. Local built-artifact testing at `/TCGTableForge/` passes; the production URL still needs its post-deploy check.
 - [x] Do not add deployment secrets unless the chosen hosting setup actually requires them; standard GitHub Pages Actions deployment uses repository permissions and an environment. No deployment secrets were added.
-- [ ] Confirm the first deploy is HTTPS, the manifest loads, the service worker controls the expected path, and deep navigation/reload behavior works.
+- [ ] Confirm the first deploy is HTTPS, the manifest loads, the service worker controls the expected path, and deep navigation/reload behavior works. Pending Pages configuration; no production URL is available yet.
 
 ## 8. Release verification and operations
 
-- [x] Run the full automated suite and record results for the release candidate. Release checks/build passed, all six data tests passed, the Chrome acceptance suite passed, and the 500-card performance run met its targets. The GitHub Actions run remains pending until the commit is pushed.
+- [x] Run the full automated suite and record results for the release candidate. On commit `30740ef`, `npm ci`, release checks, all six data tests, the Chrome acceptance suite, build, and the 500-card performance run passed in GitHub Actions. The separate Pages deploy job failed because Pages is not enabled; deployment verification remains open below.
 - [ ] Complete the manual acceptance walkthrough on a clean browser profile and with an existing project, online and offline.
 - [ ] Check the deployed app at its final URL on desktop and mobile; install it where supported and test a cold launch.
 - [x] Verify import/export backup instructions and test restoring a backup into a fresh browser profile. Chrome imports the exported JSON in a separate, empty browser context and checks all five cards.
 - [x] Review the production bundle for accidental test data, secrets, debug output, and unintended external requests. The built artifact contains only runtime files and `.nojekyll`; fixture/debug/credential scans found none, and Chrome observed only same-origin app requests.
 - [ ] Tag the release and publish concise release notes with supported browsers, known limitations, and backup guidance.
 - [x] Keep a rollback path: retain the last known-good artifact or commit and document how to redeploy it through Actions. The procedure is in `RELEASE_OPERATIONS.md`; record the first known-good commit after the initial deployment.
-- [ ] After deployment, monitor the Actions run, browser console, service-worker registration, install behavior, and reported data-loss or import/export issues.
+- [ ] After deployment, monitor the Actions run, browser console, service-worker registration, install behavior, and reported data-loss or import/export issues. The latest run's build job passed, but deployment returned 404 because Pages is not enabled.
 
 ## Release gate
 
