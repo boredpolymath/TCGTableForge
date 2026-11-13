@@ -1,0 +1,2 @@
+# Include the hand-authored static app scripts in GitHub's language statistics.
+*.js linguist-generated=false
