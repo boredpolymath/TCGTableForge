@@ -1,2 +1,2 @@
 # Include the hand-authored static app scripts in GitHub's language statistics.
-*.js linguist-generated=false
+*.js linguist-generated=false linguist-vendored=false linguist-documentation=false linguist-detectable=true
