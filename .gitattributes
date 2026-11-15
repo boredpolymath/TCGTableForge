@@ -1,7 +1,7 @@
 # Language statistics should describe the application runtime.
-*.js linguist-generated=false linguist-vendored=false linguist-documentation=false linguist-detectable=true
-*.html linguist-detectable=false
+*.js -linguist-generated -linguist-vendored -linguist-documentation linguist-detectable
+*.html -linguist-detectable
 
 # Build tooling and browser-test helpers support the app but are not its runtime.
-scripts/** linguist-detectable=false
-tests/** linguist-detectable=false
+scripts/** -linguist-detectable
+tests/** -linguist-detectable
